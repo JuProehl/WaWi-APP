@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.markus.wawiscan.MainActivity">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TVformat"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TVcontent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Artikel ID:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/TVArtikelID" />
+
+    <TextView
+        android:text="Bezeichnung:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TVArtikelID"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/TVBezeichnung" />
+
+    <TextView
+        android:text="Bestandsmenge:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TVBezeichnung"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp"
+        android:id="@+id/TVBestandsmenge" />
+
+    <Button
+        android:text="Scannen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TVBestandsmenge"
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnScan"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/TVBestandsmenge"
+        android:onClick="onClick (MainActivity)" />
+
+    <Button
+        android:text="Auslagern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAuslagern"
+        android:layout_alignBaseline="@+id/btnEinlagern"
+        android:layout_alignBottom="@+id/btnEinlagern"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClick (MainActivity)" />
+
+    <Button
+        android:text="Einlagern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEinlagern"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/btnScan"
+        android:layout_alignParentStart="true"
+        android:onClick="onClick (MainActivity)" />
+</RelativeLayout>
