@@ -20,7 +20,7 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     private TextView formatTxt, contentTxt;
-    private Button btnScan, btnEinlagern, btnAuslagern;
+    private Button buttonScannen, buttonEinlagern, buttonAuslagern;
 
     private String z ="";
 
@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnScan = (Button) findViewById(R.id.btnScan);
-        btnEinlagern = (Button) findViewById(R.id.btnEinlagern);
-        btnAuslagern = (Button) findViewById(R.id.btnAuslagern);
+        buttonScannen = (Button) findViewById(R.id.btnScan);
+        buttonEinlagern = (Button) findViewById(R.id.btnEinlagern);
+        buttonAuslagern = (Button) findViewById(R.id.btnAuslagern);
 
-        btnEinlagern.setVisibility(View.INVISIBLE);
-        btnAuslagern.setVisibility(View.INVISIBLE);
+        buttonScannen.setOnClickListener(this);
+
+        buttonEinlagern.setVisibility(View.INVISIBLE);
+        buttonAuslagern.setVisibility(View.INVISIBLE);
 
         formatTxt = (TextView) findViewById(R.id.TVformat);
         contentTxt = (TextView) findViewById(R.id.TVcontent);
@@ -70,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
         }
-        if(v.getId()==R.id.btnEinlagern){
+    /*    if(v.getId()==R.id.btnEinlagern){
 
         }
         if(v.getId()==R.id.btnAuslagern){
 
-        }
+        }*/
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
