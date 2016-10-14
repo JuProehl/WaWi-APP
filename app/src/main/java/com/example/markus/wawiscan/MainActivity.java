@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private TextView formatTxt, contentTxt;
     private Button buttonScannen, buttonEinlagern, buttonAuslagern;
 
-    private String z ="";
+    private String z ="0001WAWI0001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,43 +41,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         formatTxt = (TextView) findViewById(R.id.TVformat);
         contentTxt = (TextView) findViewById(R.id.TVcontent);
 
-        /*
-        try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection con =
-                    DriverManager.getConnection("jdbc:oracle:thin:@//oracle-srv.edvsz.hs-osnabrueck.de:1521/oraclestud","omaescher","omaescher");
-
-            Statement st = con.createStatement();
-            String sql = "select anr, bezeichnung, bestandsmenge from arti";
-            ResultSet rs=st.executeQuery(sql);
-
-
-
-            while(rs.next()){
-               z = rs.getInt(1)+ " "+ rs.getString(2)+ " "+ rs.getString(3);
-
-            }
-            contentTxt.setText(z);
-
-            con.close();
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        */
     }
 
     public void onClick(View v){
-        if(v.getId()==R.id.btnScan){
+        if(v.getId()==R.id.btnScan) {
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
         }
-    /*    if(v.getId()==R.id.btnEinlagern){
-
+        if(v.getId()==R.id.btnEinlagern){
+            Connect();
         }
         if(v.getId()==R.id.btnAuslagern){
 
-        }*/
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -88,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             String scanFormat = scanningResult.getFormatName();
 
 
-                formatTxt.setText("Format: " + scanFormat);
-                contentTxt.setText("Content: " + scanContent);
-                z= ""+scanContent;
+            formatTxt.setText("Format: " + scanFormat);
+            contentTxt.setText("Content: " + scanContent);
+            z = "" + scanContent;
 
 
         } else {
@@ -99,17 +75,85 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             toast.show();
         }
 
-        if(z.contains("/")){
-            // 0001/0001
-            String regal = z.substring(0,3);
-            String fach = z.substring(5,8);
+        if (z.contains("WAWI")) {
+            // 0001WAWI0001
+            String regal = z.substring(0, 4);
+            String fach = z.substring(8, 12);
 
             Toast toast = Toast.makeText(getApplicationContext(),
-                    regal + " "+fach, Toast.LENGTH_SHORT);
+                    regal + " " + fach, Toast.LENGTH_SHORT);
             toast.show();
+
+            formatTxt.setText("Regal: " + regal);
+            contentTxt.setText("Fach: " + fach);
+
+            for(int i = 0 ; i<regal.length(); i++){
+
+            }
+            for (int i = 0; i<fach.length(); i++){
+
+            }
+
+            buttonEinlagern.setVisibility(View.VISIBLE);
+            buttonAuslagern.setVisibility(View.VISIBLE);
         }
-
-        //Wenn Scan erfolgreich dann mit gescanntenCode Datenbankabfrage
-
     }
+
+        public void Connect() {
+            try {
+                Connection con =
+                        DriverManager.getConnection("jdbc:oracle:thin:@//oracle-srv.edvsz.hs-osnabrueck.de:1521/oraclestud", "omaescher", "omaescher");
+
+                Toast toast1;
+                if (!con.isClosed()) {
+                    toast1 = Toast.makeText(getApplicationContext(), "OPEN", Toast.LENGTH_SHORT);
+                    toast1.show();
+                } else {
+                    toast1 = Toast.makeText(getApplicationContext(), "CLOSED", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
+                buttonEinlagern.setVisibility(View.INVISIBLE);
+                buttonAuslagern.setVisibility(View.INVISIBLE);
+
+            }catch(Exception e){
+                Toast toast2;
+                toast2 = Toast.makeText(getApplicationContext(), "CATCHED", Toast.LENGTH_SHORT);
+                toast2.show();
+            }
+    }
+/*
+            try{
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                Connection con =
+                        DriverManager.getConnection("jdbc:oracle:thin:@//oracle-srv.edvsz.hs-osnabrueck.de:1521/oraclestud","omaescher","omaescher");
+
+                Toast toast1;
+                if(!con.isClosed()){
+                     toast1 = Toast.makeText(getApplicationContext(),"OPEN", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
+                else{
+                    toast1 = Toast.makeText(getApplicationContext(),"CLOSED", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
+
+
+                Statement st = con.createStatement();
+                String sql = "select anr, bezeichnung, bestandsmenge from arti";
+                ResultSet rs=st.executeQuery(sql);
+
+
+
+                while(rs.next()){
+                    z = rs.getInt(1)+ " "+ rs.getString(2)+ " "+ rs.getString(3);
+
+                }
+                contentTxt.setText(z);
+
+                con.close();
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        */
+
 }
