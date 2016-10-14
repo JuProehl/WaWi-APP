@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         buttonAuslagern = (Button) findViewById(R.id.btnAuslagern);
 
         buttonScannen.setOnClickListener(this);
+        buttonEinlagern.setOnClickListener(this);
+        buttonAuslagern.setOnClickListener(this);
+
 
         buttonEinlagern.setVisibility(View.INVISIBLE);
         buttonAuslagern.setVisibility(View.INVISIBLE);
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
         public void Connect() {
             try {
+               // Class.forName("oracle.jdbc.driver.OracleDriver");
                 Connection con =
                         DriverManager.getConnection("jdbc:oracle:thin:@//oracle-srv.edvsz.hs-osnabrueck.de:1521/oraclestud", "omaescher", "omaescher");
 
